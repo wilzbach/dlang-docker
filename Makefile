@@ -30,7 +30,7 @@ template.docker:
 
 Dockerfile: dlang.docker template.docker
 	cat dlang.docker| \
-		sed "s|{{D_VERSION}}|${D_VERSION}|g" \
+		sed "s|{{D_VERSION}}|${D_VERSION_RESOLVED}|g" \
 		> dlang.docker.tmp
 	cat template.docker | \
 		sed "s|{{BASE_IMAGE}}|${BASE_IMAGE}|g" | \
