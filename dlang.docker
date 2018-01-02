@@ -1,6 +1,6 @@
 ENV D_VERSION {{D_VERSION}}
 
-RUN apt-get update && apt-get install --no-install-recommends -y libc-dev gcc g++ curl ca-certificates libevent-dev libssl-dev gdb xz-utils \
+RUN apt-get update && apt-get install --no-install-recommends -y gcc g++ curl ca-certificates gdb libevent-dev libssl-dev make xz-utils \
 	&& update-alternatives --install "/usr/bin/ld" "ld" "/usr/bin/ld.gold" 20 \
 	&& update-alternatives --install "/usr/bin/ld" "ld" "/usr/bin/ld.bfd" 10
 
