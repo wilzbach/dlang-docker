@@ -1,0 +1,24 @@
+language: d
+services:
+  - docker
+
+branches:
+  only:
+  - master
+
+env:
+  - D_VERSION=dmd-nightly
+  - D_VERSION=dmd-beta
+  - D_VERSION=dmd
+  - D_VERSION=ldc-beta
+  - D_VERSION=ldc
+  - D_VERSION=gdc
+
+script:
+  - export D_VERSION_RESOLVED=$(~/dlang/install.sh ${D_VERSION} | sed -n -e "s/.*source ~\/dlang\/\(.*\)\/activate.*/\1/p")
+  - env
+  - make build D_VERSION=${D_VERSION} D_VERSION_RESOLVED=${D_VERSION_RESOLVED}
+
+after_success:
+  - if [ "$TRAVIS_BRANCH" == "master" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ] ; then docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD" ; fi
+  - if [ "$TRAVIS_BRANCH" == "master" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ]; then make push D_VERSION=${D_VERSION} D_VERSION_RESOLVED=${D_VERSION_RESOLVED}; fi
