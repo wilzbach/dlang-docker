@@ -16,6 +16,8 @@ Ubuntu
 
 The default tag (`latest`) is the last stable release.
 
+### Example
+
 ```dockerfile
 FROM: dlang2/dmd-ubuntu:2.077.1
 WORKDIR /dlang/app
@@ -25,7 +27,9 @@ RUN dub build -v
 CMD ["/dlang/app/app"]
 ```
 
-Available tags:
+See the [`example-app`](https://github.com/wilzbach/dlang-docker/tree/master/example-app).
+
+### Available tags
 
 - https://hub.docker.com/r/dlang2/dmd-ubuntu/tags/
 - https://hub.docker.com/r/dlang2/ldc-ubuntu/tags/
