@@ -1,5 +1,5 @@
-DLang docker image for CircleCi
-===============================
+D docker images
+===============
 
 [![Build Status](https://travis-ci.org/wilzbach/dlang-docker-circleci.svg?branch=master)](https://travis-ci.org/wilzbach/dlang-docker-circleci)
 
@@ -11,7 +11,29 @@ jobs:
       - image: dlang2/dmd-circleci
 ```
 
-Available tags
+Ubuntu
+------
+
+The default tag (`latest`) is the last stable release.
+
+```dockerfile
+FROM: dlang2/dmd-ubuntu:2.077.1
+WORKDIR /dlang/app
+COPY . .
+
+RUN dub build -v
+CMD ["/dlang/app/app"]
+```
+
+Available tags:
+
+- https://hub.docker.com/r/dlang2/dmd-ubuntu/tags/
+- https://hub.docker.com/r/dlang2/ldc-ubuntu/tags/
+- https://hub.docker.com/r/dlang2/gdc-ubuntu/tags/
+
+This repo is fully automated and new releases get deployed automatically.
+
+CircleCi: Available tags
 --------------
 
 The default tag (`latest`) is the last stable release.
@@ -46,4 +68,7 @@ Full list:
 - https://hub.docker.com/r/dlang2/ldc-circleci/tags/
 - https://hub.docker.com/r/dlang2/gdc-circleci/tags/
 
-This repo is fully automated and new releases get deployed automatically.
+Alpine
+------
+
+WIP. D doesn't support musl so far.
