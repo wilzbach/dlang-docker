@@ -18,6 +18,7 @@ script:
   - export D_VERSION_RESOLVED=$(~/dlang/install.sh ${D_VERSION} | sed -n -e "s/.*source ~\/dlang\/\(.*\)\/activate.*/\1/p")
   - env
   - make build D_VERSION=${D_VERSION} D_VERSION_RESOLVED=${D_VERSION_RESOLVED}
+  - if [ "$D_VERSION" == "dmd" ] ; then make test ; fi
 
 after_success:
   - if [ "$TRAVIS_BRANCH" == "master" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ] ; then docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD" ; fi

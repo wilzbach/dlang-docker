@@ -1,0 +1,5 @@
+name "app"
+description "A minimal D application."
+authors "seb"
+copyright "Copyright © 2018, seb"
+license "BSL-1.0"

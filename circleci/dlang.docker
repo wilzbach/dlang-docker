@@ -1,4 +1,7 @@
 ENV D_VERSION {{D_VERSION}}
+ENV BIN_FOLDER {{BIN_FOLDER}}
+ENV LIB_FOLDER {{LIB_FOLDER}}
+ENV DPATH=/dlang
 
 RUN apt-get update && apt-get install --no-install-recommends -y gcc g++ curl ca-certificates gdb libevent-dev libssl-dev make xz-utils \
 	&& update-alternatives --install "/usr/bin/ld" "ld" "/usr/bin/ld.gold" 20 \
@@ -6,8 +9,8 @@ RUN apt-get update && apt-get install --no-install-recommends -y gcc g++ curl ca
 
 RUN curl -fsS https://dlang.org/install.sh | bash -s ${D_VERSION} -p /dlang
 
-ENV PATH="/dlang/${D_VERSION}/linux/bin64:${PATH}"
-ENV LIBRARY_PATH="/dlang/${D_VERSION}/linux/lib64:${LIBRARY_PATH}"
-ENV LD_LIBRARY_PATH="/dlang/${D_VERSION}/linux/lib64:${LD_LIBRARY_PATH}"
+ENV PATH="${DPATH}/${D_VERSION}/${BIN_FOLDER}:${PATH}"
+ENV LIBRARY_PATH="${DPATH}/${D_VERSION}/${LIB_FOLDER}:${LIBRARY_PATH}"
+ENV LD_LIBRARY_PATH="${DPATH}/${D_VERSION}/${LIB_FOLDER}:${LD_LIBRARY_PATH}"
 RUN chmod 555 -R /dlang
 RUN cp "/dlang/${D_VERSION}/activate" /etc/profile.d/activate-d
