@@ -3,7 +3,8 @@ ENV BIN_FOLDER {{BIN_FOLDER}}
 ENV LIB_FOLDER {{LIB_FOLDER}}
 ENV DPATH=/dlang
 
-RUN apt-get update && \
+RUN set -ex && \
+	apt-get update && \
 	apt-get install --no-install-recommends -y \
 	ca-certificates \
 	curl \
@@ -16,7 +17,8 @@ RUN apt-get update && \
 	&& update-alternatives --install "/usr/bin/ld" "ld" "/usr/bin/ld.gold" 20 \
 	&& update-alternatives --install "/usr/bin/ld" "ld" "/usr/bin/ld.bfd" 10
 
-RUN curl -fsS https://dlang.org/install.sh | bash -s ${D_VERSION} -p /dlang
+RUN set -ex && \
+	curl -fsS https://dlang.org/install.sh | bash -s ${D_VERSION} -p /dlang
 
 ENV PATH="${DPATH}/${D_VERSION}/${BIN_FOLDER}:${PATH}"
 ENV LIBRARY_PATH="${DPATH}/${D_VERSION}/${LIB_FOLDER}:${LIBRARY_PATH}"

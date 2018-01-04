@@ -28,7 +28,8 @@ wget https://github.com/sgerrand/alpine-pkg-glibc/releases/download/2.26-r0/glib
 
 RUN ln -s /usr/bin/ld.gold /usr/local/bin/ld
 
-RUN curl -fsS https://dlang.org/install.sh | bash -s ${D_VERSION} -p ${DPATH}
+RUN set -ex && \
+	curl -fsS https://dlang.org/install.sh | bash -s ${D_VERSION} -p ${DPATH}
 
 ENV PATH="${DPATH}/${D_VERSION}/${BIN_FOLDER}:${PATH}"
 ENV LIBRARY_PATH="${DPATH}/${D_VERSION}/${LIB_FOLDER}:${LIBRARY_PATH}"
