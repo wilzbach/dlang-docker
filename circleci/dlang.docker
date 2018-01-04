@@ -3,7 +3,16 @@ ENV BIN_FOLDER {{BIN_FOLDER}}
 ENV LIB_FOLDER {{LIB_FOLDER}}
 ENV DPATH=/dlang
 
-RUN apt-get update && apt-get install --no-install-recommends -y gcc g++ curl ca-certificates gdb libevent-dev libssl-dev make xz-utils \
+RUN apt-get update && \
+	apt-get install --no-install-recommends -y \
+	ca-certificates \
+	curl \
+	g++-multilib \
+	gdb \
+	libevent-dev \
+	libssl-dev \
+	make \
+	xz-utils \
 	&& update-alternatives --install "/usr/bin/ld" "ld" "/usr/bin/ld.gold" 20 \
 	&& update-alternatives --install "/usr/bin/ld" "ld" "/usr/bin/ld.bfd" 10
 
