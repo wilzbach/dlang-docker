@@ -23,5 +23,7 @@ RUN set -ex && \
 ENV PATH="${DPATH}/${D_VERSION}/${BIN_FOLDER}:${PATH}"
 ENV LIBRARY_PATH="${DPATH}/${D_VERSION}/${LIB_FOLDER}:${LIBRARY_PATH}"
 ENV LD_LIBRARY_PATH="${DPATH}/${D_VERSION}/${LIB_FOLDER}:${LD_LIBRARY_PATH}"
-RUN chmod 555 -R /dlang && chown root:root -R /dlang
+RUN set -ex && \
+	chmod 555 -R /dlang && \
+	chown root:root -R /dlang
 RUN cp "/dlang/${D_VERSION}/activate" /etc/profile.d/activate-d
