@@ -21,5 +21,5 @@ RUN curl -fsS https://dlang.org/install.sh | bash -s ${D_VERSION} -p /dlang
 ENV PATH="${DPATH}/${D_VERSION}/${BIN_FOLDER}:${PATH}"
 ENV LIBRARY_PATH="${DPATH}/${D_VERSION}/${LIB_FOLDER}:${LIBRARY_PATH}"
 ENV LD_LIBRARY_PATH="${DPATH}/${D_VERSION}/${LIB_FOLDER}:${LD_LIBRARY_PATH}"
-RUN chmod 555 -R /dlang
+RUN chmod 777 -R /dlang
 RUN cp "/dlang/${D_VERSION}/activate" /etc/profile.d/activate-d
