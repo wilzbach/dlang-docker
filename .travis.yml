@@ -7,7 +7,6 @@ branches:
   - master
 
 env:
-  - D_VERSION=dmd-nightly
   - D_VERSION=dmd-beta
   - D_VERSION=dmd
   - D_VERSION=ldc-beta
