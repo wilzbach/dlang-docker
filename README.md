@@ -1,7 +1,7 @@
 D docker images
 ===============
 
-[![Build Status](https://travis-ci.org/wilzbach/dlang-docker-circleci.svg?branch=master)](https://travis-ci.org/wilzbach/dlang-docker-circleci)
+[![Build Status](https://travis-ci.org/wilzbach/dlang-docker.svg?branch=master)](https://travis-ci.org/wilzbach/dlang-docker)
 
 ```yaml
 version: 2
