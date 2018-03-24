@@ -13,6 +13,10 @@ env:
   - D_VERSION=ldc
   - D_VERSION=gdc
 
+matrix:
+  allow_failures:
+    - env: D_VERSION=gdc
+
 script:
   - export D_VERSION_RESOLVED=$(~/dlang/install.sh ${D_VERSION} | sed -n -e "s/.*source ~\/dlang\/\(.*\)\/activate.*/\1/p")
   - env
