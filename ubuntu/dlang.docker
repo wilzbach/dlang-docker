@@ -14,6 +14,7 @@ RUN set -ex && \
 	gcc \
 	libevent-dev \
 	libssl-dev \
+	libxml2 \
 	make \
 	xz-utils \
 	&& update-alternatives --install "/usr/bin/ld" "ld" "/usr/bin/ld.gold" 20 \
