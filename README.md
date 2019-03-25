@@ -71,8 +71,3 @@ Full list:
 - https://hub.docker.com/r/dlang2/dmd-circleci/tags/
 - https://hub.docker.com/r/dlang2/ldc-circleci/tags/
 - https://hub.docker.com/r/dlang2/gdc-circleci/tags/
-
-Alpine
-------
-
-WIP. D doesn't support musl so far.
