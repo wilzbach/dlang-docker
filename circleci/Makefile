@@ -1,6 +1,6 @@
 # A sane variant to the CircleCi scripts
 
-BASE_IMAGE="ubuntu:17.10"
+BASE_IMAGE="ubuntu:18.04"
 DOCKER_POSTFIX=-circleci
 
 include ../common.mak
