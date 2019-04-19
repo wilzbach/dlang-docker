@@ -8,10 +8,12 @@ RUN set -ex && \
 	apt-get install --no-install-recommends -y \
 	ca-certificates \
 	curl \
+	libc6-dev \
 	g++-multilib \
 	gdb \
 	libevent-dev \
 	libssl-dev \
+	libz-dev \
 	make \
 	xz-utils \
 	&& update-alternatives --install "/usr/bin/ld" "ld" "/usr/bin/ld.gold" 20 \
@@ -20,10 +22,11 @@ RUN set -ex && \
 RUN set -ex && \
 	curl -fsS https://dlang.org/install.sh | bash -s ${D_VERSION} -p /dlang
 
+RUN ln -s ${DPATH}/${D_VERSION} ${DPATH}/dc && ls ${DPATH}
+
 ENV PATH="${DPATH}/${D_VERSION}/${BIN_FOLDER}:${PATH}"
 ENV LIBRARY_PATH="${DPATH}/${D_VERSION}/${LIB_FOLDER}:${LIBRARY_PATH}"
 ENV LD_LIBRARY_PATH="${DPATH}/${D_VERSION}/${LIB_FOLDER}:${LD_LIBRARY_PATH}"
 RUN set -ex && \
 	chmod 555 -R /dlang && \
 	chown circleci:circleci -R /dlang
-RUN cp "/dlang/${D_VERSION}/activate" /etc/profile.d/activate-d

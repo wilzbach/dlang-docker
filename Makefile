@@ -13,6 +13,4 @@ push:
 	#$(MAKE) -C alpine push
 
 test:
-	(cd example-app && \
-		docker build -t myorg/myapp . && \
-		docker run -t myorg/myapp) | grep "Hello D"
+	$(MAKE) -C example-app test

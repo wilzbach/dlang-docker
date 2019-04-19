@@ -11,10 +11,12 @@ RUN set -ex && \
 	apt-get install --no-install-recommends -y \
 	ca-certificates \
 	curl \
+	libc6-dev \
 	gcc \
 	libevent-dev \
 	libssl-dev \
 	libxml2 \
+	libz-dev \
 	make \
 	xz-utils \
 	&& update-alternatives --install "/usr/bin/ld" "ld" "/usr/bin/ld.gold" 20 \
@@ -23,8 +25,9 @@ RUN set -ex && \
 RUN set -ex && \
 	curl -fsS https://dlang.org/install.sh | bash -s ${D_VERSION} -p ${DPATH}
 
+RUN chmod 755 -R ${DPATH}
+RUN ln -s ${DPATH}/${D_VERSION} ${DPATH}/dc && ls ${DPATH}
+
 ENV PATH="${DPATH}/${D_VERSION}/${BIN_FOLDER}:${PATH}"
 ENV LIBRARY_PATH="${DPATH}/${D_VERSION}/${LIB_FOLDER}:${LIBRARY_PATH}"
 ENV LD_LIBRARY_PATH="${DPATH}/${D_VERSION}/${LIB_FOLDER}:${LD_LIBRARY_PATH}"
-RUN chmod 755 -R ${DPATH}
-RUN cp "${DPATH}/${D_VERSION}/activate" /etc/profile.d/activate-d
