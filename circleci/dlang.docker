@@ -28,4 +28,3 @@ ENV LD_LIBRARY_PATH="${DPATH}/${D_VERSION}/${LIB_FOLDER}:${LD_LIBRARY_PATH}"
 RUN set -ex && \
 	chmod 555 -R /dlang && \
 	chown circleci:circleci -R /dlang
-RUN cp "/dlang/${D_VERSION}/activate" /etc/profile.d/activate-d
