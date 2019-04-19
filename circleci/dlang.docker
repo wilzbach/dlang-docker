@@ -8,10 +8,12 @@ RUN set -ex && \
 	apt-get install --no-install-recommends -y \
 	ca-certificates \
 	curl \
+	libc6-dev \
 	g++-multilib \
 	gdb \
 	libevent-dev \
 	libssl-dev \
+	libz-dev \
 	make \
 	xz-utils \
 	&& update-alternatives --install "/usr/bin/ld" "ld" "/usr/bin/ld.gold" 20 \
