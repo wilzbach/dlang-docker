@@ -17,6 +17,7 @@ RUN set -ex && \
 	libssl-dev \
 	libxml2 \
 	libz-dev \
+	gpg \
 	make \
 	xz-utils \
 	&& update-alternatives --install "/usr/bin/ld" "ld" "/usr/bin/ld.gold" 20 \
