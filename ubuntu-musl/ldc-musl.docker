@@ -1,0 +1,7 @@
+ARG CC=musl-gcc
+
+RUN apt-get install -y --no-install-recommends cmake musl-tools && \
+    ldc-build-runtime --dFlags="-w;-mtriple=x86_64-alpine-linux-musl" BUILD_SHARED_LIBS=OFF && \
+    mv /ldc-build-runtime.tmp/lib /dlang/dc/lib-musl && \
+    rm -rf /ldc-build-runtime.tmp
+COPY ldc-musl.conf /dlang/dc/etc/ldc2.conf
