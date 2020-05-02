@@ -1,0 +1,30 @@
+FROM {{BASE_IMAGE}}
+
+ENV D_VERSION {{D_VERSION}}
+ENV BIN_FOLDER {{BIN_FOLDER}}
+ENV LIB_FOLDER {{LIB_FOLDER}}
+ENV DPATH=/dlang
+
+RUN set -ex && \
+	yum update -y && \
+	yum install -y gcc tar xz libevent-devel shadow-utils
+
+RUN groupadd --gid 1000 dlang \
+  && useradd --uid 1000 --gid dlang --shell /bin/bash --create-home dlang
+
+RUN mkdir ${DPATH}\
+    && chown dlang ${DPATH}
+
+USER dlang
+
+RUN set -ex && \
+	curl -fsS https://dlang.org/install.sh | bash -s ${D_VERSION} -p ${DPATH} && \
+	chmod 755 -R ${DPATH}
+
+USER root
+
+RUN ln -s ${DPATH}/${D_VERSION} ${DPATH}/dc && ls ${DPATH}
+
+ENV PATH="${DPATH}/${D_VERSION}/${BIN_FOLDER}:${PATH}"
+ENV LIBRARY_PATH="${DPATH}/${D_VERSION}/${LIB_FOLDER}:${LIBRARY_PATH}"
+ENV LD_LIBRARY_PATH="${DPATH}/${D_VERSION}/${LIB_FOLDER}:${LD_LIBRARY_PATH}"
