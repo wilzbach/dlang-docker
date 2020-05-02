@@ -10,3 +10,6 @@ Dockerfile: dlang.docker Makefile
 		sed "s|{{BIN_FOLDER}}|${BIN_FOLDER}|g" | \
 		sed "s|{{LIB_FOLDER}}|${LIB_FOLDER}|g" \
 		> $@
+
+clean:
+	rm Dockerfile
