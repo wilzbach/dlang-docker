@@ -1,38 +1,8 @@
 FROM {{BASE_IMAGE}}
 
-ENV D_VERSION {{D_VERSION}}
-ENV BIN_FOLDER {{BIN_FOLDER}}
-ENV LIB_FOLDER {{LIB_FOLDER}}
-ENV DEBIAN_FRONTEND=noninteractive
-ENV DPATH=/dlang
-
-RUN set -eux; \
-	apk add --no-cache \
-	bash \
-	binutils-gold \
-	ca-certificates \
-	curl \
+RUN apk add --no-cache \
+	dub \
+	dtools-rdmd \
 	gcc \
-	g++ \
-	libstdc++ \
-	gnupg \
-	libevent-dev \
-	make \
-	openssl-dev \
-	xz
-
-RUN wget -q -O /etc/apk/keys/sgerrand.rsa.pub https://raw.githubusercontent.com/sgerrand/alpine-pkg-glibc/master/sgerrand.rsa.pub && \
-wget https://github.com/sgerrand/alpine-pkg-glibc/releases/download/2.26-r0/glibc-2.26-r0.apk && \
-	apk add glibc-2.26-r0.apk && \
-	rm glibc-2.26-r0.apk /etc/apk/keys/sgerrand.rsa.pub
-
-RUN ln -s /usr/bin/ld.gold /usr/local/bin/ld
-
-RUN set -ex && \
-	curl -fsS https://dlang.org/install.sh | bash -s ${D_VERSION} -p ${DPATH}
-
-ENV PATH="${DPATH}/${D_VERSION}/${BIN_FOLDER}:${PATH}"
-ENV LIBRARY_PATH="${DPATH}/${D_VERSION}/${LIB_FOLDER}:${LIBRARY_PATH}"
-ENV LD_LIBRARY_PATH="${DPATH}/${D_VERSION}/${LIB_FOLDER}:${LD_LIBRARY_PATH}"
-RUN chmod 755 -R ${DPATH}
-RUN echo "${DPATH}/${D_VERSION}/activate" >> /etc/profile
+	musl-dev \
+	{{PKG_NAME}}
